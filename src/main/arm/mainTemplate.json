@@ -16,37 +16,6 @@
 			},
 			"defaultValue": ""
 		},
-		"adminPasswordOrKey": {
-			"type": "securestring",
-			"metadata": {
-				"description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
-			}
-		},
-		"adminUsername": {
-			"defaultValue": "weblogic",
-			"type": "string",
-			"metadata": {
-				"description": "User name for the Virtual Machine."
-			}
-		},
-		"authenticationType": {
-			"type": "string",
-			"defaultValue": "password",
-			"allowedValues": [
-				"sshPublicKey",
-				"password"
-			],
-			"metadata": {
-				"description": "Type of authentication to use on the Virtual Machine. SSH key is recommended."
-			}
-		},
-		"dnsLabelPrefix": {
-			"defaultValue": "wls",
-			"type": "string",
-			"metadata": {
-				"description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
-			}
-		},
 		"keyType": {
 			"type": "string",
 			"defaultValue": "PKCS12",
@@ -107,53 +76,6 @@
 				"description": "Provide Oracle HTTP Server domain name"
 			}
 		},
-		"ohsNMPassword": {
-			"defaultValue": "",
-			"type": "securestring",
-			"metadata": {
-				"description": "Password for Oracle HTTP Server NodeManager"
-			}
-		},
-		"ohsNMUser": {
-			"defaultValue": "weblogic",
-			"type": "string",
-			"metadata": {
-				"description": "Provide Oracle HTTP Server NodeManager user name"
-			}
-		},
-		"ohsSkuUrnVersion": {
-			"type": "string",
-			"defaultValue": "ohs-122140-jdk8-ol76;ohs-122140-jdk8-ol76;latest",
-			"allowedValues": [
-				"ohs-122140-jdk8-ol76;ohs-122140-jdk8-ol76;latest",
-				"ohs-122140-jdk8-ol74;ohs-122140-jdk8-ol74;latest",
-				"ohs-122140-jdk8-ol73;ohs-122140-jdk8-ol73;latest"
-			],
-			"metadata": {
-				"description": "The Oracle Linux image with Oracle HTTP Server and Java preinstalled. Semicolon separated string of Sku, URN, and Version"
-			}
-		},
-		"ohsVMName": {
-			"defaultValue": "ohsVM",
-			"type": "string",
-			"metadata": {
-				"description": "Oracle HTTP Server hosting VM name."
-			}
-		},
-		"ohshttpPort": {
-			"defaultValue": "7777",
-			"type": "string",
-			"metadata": {
-				"description": "Provide Oracle HTTP Server, HTTP port"
-			}
-		},
-		"ohshttpsPort": {
-			"defaultValue": "4444",
-			"type": "string",
-			"metadata": {
-				"description": "Provide Oracle HTTP Server, HTTPS port"
-			}
-		},
 		"oracleVaultPswd": {
 			"defaultValue": "",
 			"type": "securestring",
@@ -186,59 +108,11 @@
 				"description": "Password of the SSL Certificate Data"
 			}
 		},
-		"vmSizeSelect": {
-			"defaultValue": "Standard_A1",
-			"type": "string",
-			"metadata": {
-				"description": "Select appropriate VM Size as per requirement"
-			}
-		},
 		"utcValue": {
 			"type": "string",
 			"defaultValue": "[utcNow()]",
 			"metadata": {
 				"description": "Current deployment time. Used as a tag in deployment script."
-			}
-		},
-		"storageAccountName": {
-			"defaultValue": "",
-			"type": "string",
-			"metadata": {
-				"description": "Provide existing WebLogic deployment resource group storage account name"
-			}
-		},
-		"virtualNetworkName": {
-			"defaultValue": "",
-			"type": "string",
-			"metadata": {
-				"description": "Provide existing WebLogic deployment resource group virtual network name"
-			}
-		},
-		"networkSecurityGroup" :{
-			"defaultValue": "",
-			"type": "string",
-			"metadata": {
-				"description": "Provide existing WebLogic deployed resource group network security group name"
-			}
-		},
-		"wlsAdminVMName": {
-			"defaultValue": "",
-			"type": "string",
-			"metadata": {
-				"description": "Provide WebLogic admin server hosted VM computer name"
-			}
-		},
-		"wlsPassword": {
-			"type": "securestring",
-			"metadata": {
-				"description": "Password for your Weblogic domain name"
-			}
-		},
-		"wlsUserName": {
-			"defaultValue": "weblogic",
-			"type": "string",
-			"metadata": {
-				"description": "Username for your Weblogic domain name"
 			}
 		},
 		"keyVaultSku": {
@@ -255,9 +129,7 @@
 		"const_currentSubscription": "[subscription().subscriptionId]",
 		"name_ohsLinkedTemplateName": "ohsNestedTemplate.json",
 		"name_ohsKeyVaultNestedTemplate": "_ohsKeyVaultNestedTemplate.json",
-		"name_keyVaultName": "[take(concat('wls-kv', uniqueString(parameters('utcValue'))), 24)]",
-		"name_adminURL": "[concat('http://',parameters('wlsAdminVMName'),':7005')]",
-		"name_adminRestMgmtURL": "[concat(variables('name_adminURL'),'/management/weblogic/latest')]"
+		"name_keyVaultName": "[take(concat('wls-kv', uniqueString(parameters('utcValue'))), 24)]"
 	},
 	"resources": [
 		{
@@ -310,24 +182,6 @@
 					"_artifactsLocationSasToken": {
 						"value": "[parameters('_artifactsLocationSasToken')]"
 					},
-					"adminUsername": {
-						"value": "[parameters('adminUsername')]"
-					},
-					"adminPasswordOrKey": {
-						"value": "[parameters('adminPasswordOrKey')]"
-					},
-					"authenticationType": {
-						"value": "[parameters('authenticationType')]"
-					},
-					"dnsLabelPrefix": {
-						"value": "[parameters('dnsLabelPrefix')]"
-					},
-					"storageAccountName": {
-						"value": "[parameters('storageAccountName')]"
-					},
-					"networkSecurityGroup": {
-						"value": "[parameters('networkSecurityGroup')]"					
-					},
 					"location": {
 						"value": "[parameters('location')]"
 					},
@@ -336,24 +190,6 @@
 					},
 					"ohsDomainName": {
 						"value": "[parameters('ohsDomainName')]"
-					},
-					"ohsNMPassword": {
-						"value": "[parameters('ohsNMPassword')]"
-					},
-					"ohsNMUser": {
-						"value": "[parameters('ohsNMUser')]"
-					},
-					"ohsSkuUrnVersion": {
-						"value": "[parameters('ohsSkuUrnVersion')]"
-					},
-					"ohsVMName": {
-						"value": "[parameters('ohsVMName')]"
-					},
-					"ohshttpPort": {
-						"value": "[parameters('ohshttpPort')]"
-					},
-					"ohshttpsPort": {
-						"value": "[parameters('ohshttpsPort')]"
 					},
 					"ohsSSLKeystoreData": {
 						"reference": {
@@ -373,21 +209,6 @@
 					},
 					"oracleVaultPswd": {
 						"value": "[parameters('oracleVaultPswd')]"
-					},
-					"virtualNetworkName": {
-						"value": "[parameters('virtualNetworkName')]"
-					},
-					"vmSizeSelect": {
-						"value": "[parameters('vmSizeSelect')]"
-					},
-					"adminRestMgmtURL": {
-						"value": "[variables('name_adminRestMgmtURL')]"
-					},
-					"wlsPassword": {
-						"value": "[parameters('wlsPassword')]"
-					},
-					"wlsUserName": {
-						"value": "[parameters('wlsUserName')]"
 					},
 					"keyType": {
 						"value": "[parameters('keyType')]"
