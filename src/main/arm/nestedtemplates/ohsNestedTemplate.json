@@ -22,41 +22,6 @@
 				"description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated. Use the defaultValue if the staging location is not secured."
 			}
 		},
-		"adminPasswordOrKey": {
-			"type": "securestring",
-			"metadata": {
-				"description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
-			}
-		},
-		"adminRestMgmtURL": {
-			"type": "string",
-			"metadata": {
-				"description": "Provide WebLogic admin REST management URL"
-			}
-		},
-		"adminUsername": {
-			"type": "string",
-			"metadata": {
-				"description": "User name for the Virtual Machine."
-			}
-		},
-		"authenticationType": {
-			"type": "string",
-			"defaultValue": "password",
-			"allowedValues": [
-				"sshPublicKey",
-				"password"
-			],
-			"metadata": {
-				"description": "Type of authentication to use on the Virtual Machine. SSH key is recommended."
-			}
-		},
-		"dnsLabelPrefix": {
-			"type": "string",
-			"metadata": {
-				"description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
-			}
-		},
 		"guidValue": {
 			"type": "string",
 			"defaultValue": "[newGuid()]"
@@ -90,18 +55,6 @@
 				"description": "Provide Oracle HTTP Server domain name"
 			}
 		},
-		"ohsNMPassword": {
-			"type": "securestring",
-			"metadata": {
-				"description": "Password for Oracle HTTP Server NodeManager"
-			}
-		},
-		"ohsNMUser": {
-			"type": "string",
-			"metadata": {
-				"description": "Provide Oracle HTTP Server NodeManager user name"
-			}
-		},
 		"ohsSSLKeystoreData": {
 			"type": "string",
 			"metadata": {
@@ -114,78 +67,10 @@
 				"description": "The name of the secret in the specified KeyVault whose value is the password for the SSL Certificate"
 			}
 		},
-		"ohsSkuUrnVersion": {
-			"type": "string",
-			"defaultValue": "ohs-122140-jdk8-ol76;ohs-122140-jdk8-ol76;latest",
-			"allowedValues": [
-				"ohs-122140-jdk8-ol76;ohs-122140-jdk8-ol76;latest",
-				"ohs-122140-jdk8-ol74;ohs-122140-jdk8-ol74;latest",
-				"ohs-122140-jdk8-ol73;ohs-122140-jdk8-ol73;latest"
-			],
-			"metadata": {
-				"description": "The Oracle Linux image with Oracle HTTP Server and Java preinstalled. Semicolon separated string of Sku, URN, and Version"
-			}
-		},
-		"ohsVMName": {
-			"type": "string",
-			"metadata": {
-				"description": "User name for the Virtual Machine."
-			}
-		},
-		"ohshttpPort": {
-			"type": "string",
-			"metadata": {
-				"description": "Provide Oracle HTTP Server, HTTP port"
-			}
-		},
-		"ohshttpsPort": {
-			"type": "string",
-			"metadata": {
-				"description": "Provide Oracle HTTP Server, HTTPS port"
-			}
-		},
 		"oracleVaultPswd": {
 			"type": "string",
 			"metadata": {
 				"description": "Password for Oracle Vault store"
-			}
-		},
-		"storageAccountName": {
-			"type": "string",
-			"metadata": {
-				"description": "Provide existing WebLogic deployment resource group storage account name"
-			}
-		},
-		"networkSecurityGroup" :{
-			"defaultValue": "",
-			"type": "string",
-			"metadata": {
-				"description": "Provide existing WebLogic deployed resource group network security group name"
-			}
-		},
-		"virtualNetworkName": {
-			"type": "string",
-			"metadata": {
-				"description": "Provide existing WebLogic deployment resource group virtual network name"
-			}
-		},
-		"vmSizeSelect": {
-			"type": "string",
-			"defaultValue": "Standard_A3",
-			"metadata": {
-				"description": "Select appropriate VM Size as per requirement"
-			}
-		},
-		"wlsPassword": {
-			"type": "string",
-			"metadata": {
-				"description": "Provide WebLogic password"
-			}
-		},
-		"wlsUserName": {
-			"type": "string",
-			"metadata": {
-				"description": "Provide WebLogic username"
 			}
 		}
 	},
@@ -359,20 +244,12 @@
 					]
 				},
 				"protectedSettings": {
-					"commandToExecute": "[concat('sh setupOHS.sh',' ',parameters('ohsDomainName'),' ',parameters('ohsComponentName'),' ',parameters('ohsNMUser'),' ',parameters('ohsNMPassword'),' ',parameters('ohshttpPort'),' ',parameters('ohshttpsPort'),' ',parameters('adminRestMgmtURL'),' ',parameters('wlsUserName'),' ',parameters('wlsPassword'),' ',base64(parameters('ohsSSLKeystoreData')),' ',base64(parameters('ohsSSLKeystorePassword')),' ',parameters('oracleVaultPswd'),' ',parameters('keyType'))]"
+					"commandToExecute": "[concat('sh setupOHS.sh',' ',parameters('ohsDomainName'),' ',parameters('ohsComponentName'),' ',base64(parameters('ohsSSLKeystoreData')),' ',base64(parameters('ohsSSLKeystorePassword')),' ',parameters('oracleVaultPswd'),' ',parameters('keyType'))]"
 				}
 			}
 		}
 	],
 	"outputs": {
-		"_ohsPublicIP": {
-			"type": "string",
-			"value": "[resourceId('Microsoft.Network/publicIPAddresses',concat(parameters('ohsVMName'),variables('name_publicIPAddress')))]"
-		},
-		"ohsHostName": {
-			"type": "string",
-			"value": "[reference(variables('name_outputOHSHost'), '${azure.apiVersion}').dnsSettings.fqdn]"
-		},
 		"ohsAccessURL": {
 			"type": "string",
 			"value": "[concat('http://',reference(variables('name_outputOHSHost'), '${azure.apiVersion}').dnsSettings.fqdn,':',parameters('ohshttpPort'))]"
