@@ -1,10 +1,10 @@
 {
   "$schema": "https://aka.ms/azure-quickstart-templates-metadata-schema#",
   "type": "QuickStart",
-  "itemDisplayName": "Creating Oracle HTTP Server as load balancer against deployed WebLogic offer",
+  "itemDisplayName": "Renewing certificates for existing OHS deployment",
   "icon": "oracle-linux",
-  "description": "This template allows you to create Oracle HTTP Server 12.2.1.4.0 pre installed configured with existing WebLogic offer .",
-  "summary": "This template takes a minimum amount of parameters and creates Oracle HTTP Server setup",
+  "description": "This template allows you to renew the certificates for existing OHS deployment.",
+  "summary": "This template takes a minimum amount of parameters to renew OHS certificates",
   "githubUsername": "wls-eng",
-  "dateUpdated": "2020-04-21"
+  "dateUpdated": "2020-05-13"
 }
