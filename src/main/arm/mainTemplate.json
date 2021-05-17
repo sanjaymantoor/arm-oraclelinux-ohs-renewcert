@@ -135,7 +135,7 @@
 		{
 			"name": "ohsKeyVaultNestedTemplate",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "${azure.apiVersion}",
+			"apiVersion": "2020-06-01",
 			"condition": "[equals(parameters('ohsSSLConfigAccessOption'), variables('const_ohsSSLConfigAccessOptionUploadConfig'))]",
 			"properties": {
 				"mode": "Incremental",
@@ -168,7 +168,7 @@
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ohsKeyVaultNestedTemplate')]"
 			],
-			"apiVersion": "${azure.apiVersion}",
+			"apiVersion": "2020-06-01",
 			"properties": {
 				"mode": "Incremental",
 				"templateLink": {
@@ -194,17 +194,17 @@
 					"ohsSSLKeystoreData": {
 						"reference": {
 							"keyVault": {
-								"id": "[resourceId(variables('const_currentSubscription'), if(equals(parameters('ohsSSLConfigAccessOption'), variables('const_ohsSSLConfigAccessOptionKeyVaultStoredConfig')),parameters('keyVaultResourceGroup'),resourceGroup().name), 'Microsoft.KeyVault/vaults', if(equals(parameters('ohsSSLConfigAccessOption'), variables('const_ohsSSLConfigAccessOptionKeyVaultStoredConfig')),parameters('keyVaultName'),reference('ohsKeyVaultNestedTemplate', '${azure.apiVersion}').outputs.keyVaultName.value))]"
+								"id": "[resourceId(variables('const_currentSubscription'), if(equals(parameters('ohsSSLConfigAccessOption'), variables('const_ohsSSLConfigAccessOptionKeyVaultStoredConfig')),parameters('keyVaultResourceGroup'),resourceGroup().name), 'Microsoft.KeyVault/vaults', if(equals(parameters('ohsSSLConfigAccessOption'), variables('const_ohsSSLConfigAccessOptionKeyVaultStoredConfig')),parameters('keyVaultName'),reference('ohsKeyVaultNestedTemplate', '2020-06-01').outputs.keyVaultName.value))]"
 							},
-							"secretName": "[if(equals(parameters('ohsSSLConfigAccessOption'), variables('const_ohsSSLConfigAccessOptionKeyVaultStoredConfig')),parameters('keyVaultSSLCertDataSecretName'),reference('ohsKeyVaultNestedTemplate', '${azure.apiVersion}').outputs.keyStoreDataSecretName.value)]"
+							"secretName": "[if(equals(parameters('ohsSSLConfigAccessOption'), variables('const_ohsSSLConfigAccessOptionKeyVaultStoredConfig')),parameters('keyVaultSSLCertDataSecretName'),reference('ohsKeyVaultNestedTemplate', '2020-06-01').outputs.keyStoreDataSecretName.value)]"
 						}
 					},
 					"ohsSSLKeystorePassword": {
 						"reference": {
 							"keyVault": {
-								"id": "[resourceId(variables('const_currentSubscription'), if(equals(parameters('ohsSSLConfigAccessOption'), variables('const_ohsSSLConfigAccessOptionKeyVaultStoredConfig')),parameters('keyVaultResourceGroup'),resourceGroup().name), 'Microsoft.KeyVault/vaults', if(equals(parameters('ohsSSLConfigAccessOption'), variables('const_ohsSSLConfigAccessOptionKeyVaultStoredConfig')),parameters('keyVaultName'),reference('ohsKeyVaultNestedTemplate', '${azure.apiVersion}').outputs.keyVaultName.value))]"
+								"id": "[resourceId(variables('const_currentSubscription'), if(equals(parameters('ohsSSLConfigAccessOption'), variables('const_ohsSSLConfigAccessOptionKeyVaultStoredConfig')),parameters('keyVaultResourceGroup'),resourceGroup().name), 'Microsoft.KeyVault/vaults', if(equals(parameters('ohsSSLConfigAccessOption'), variables('const_ohsSSLConfigAccessOptionKeyVaultStoredConfig')),parameters('keyVaultName'),reference('ohsKeyVaultNestedTemplate', '2020-06-01').outputs.keyVaultName.value))]"
 							},
-							"secretName": "[if(equals(parameters('ohsSSLConfigAccessOption'), variables('const_ohsSSLConfigAccessOptionKeyVaultStoredConfig')),parameters('keyVaultSSLCertPasswordSecretName'),reference('ohsKeyVaultNestedTemplate', '${azure.apiVersion}').outputs.keyStorePwdSecretName.value)]"
+							"secretName": "[if(equals(parameters('ohsSSLConfigAccessOption'), variables('const_ohsSSLConfigAccessOptionKeyVaultStoredConfig')),parameters('keyVaultSSLCertPasswordSecretName'),reference('ohsKeyVaultNestedTemplate', '2020-06-01').outputs.keyStorePwdSecretName.value)]"
 						}
 					},
 					"oracleVaultPswd": {
@@ -220,11 +220,11 @@
 	"outputs": {
 		"ohsAccessURL": {
 			"type": "string",
-			"value": "[reference('ohsLinkedTemplate', '${azure.apiVersion}').outputs.ohsAccessURL.value]"
+			"value": "[reference('ohsLinkedTemplate', '2020-06-01').outputs.ohsAccessURL.value]"
 		},
 		"ohsSecureAccessURL": {
 			"type": "string",
-			"value": "[reference('ohsLinkedTemplate', '${azure.apiVersion}').outputs.ohsSecureAccessURL.value]"
+			"value": "[reference('ohsLinkedTemplate', '2020-06-01').outputs.ohsSecureAccessURL.value]"
 		}
 	}
 }
