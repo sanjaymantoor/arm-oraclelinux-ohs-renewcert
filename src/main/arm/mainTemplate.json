@@ -164,9 +164,6 @@
 					},
 					"keyVaultName": {
 						"value": "[variables('name_keyVaultName')]"
-					},
-					"ohsVMName": {
-						"value": "[parameters('ohsVMName')]"					
 					}
 				}
 			}
@@ -221,6 +218,9 @@
 					},
 					"keyType": {
 						"value": "[parameters('keyType')]"
+					},
+					"ohsVMName": {
+						"value": "[parameters('ohsVMName')]"					
 					}
 				}
 			}
