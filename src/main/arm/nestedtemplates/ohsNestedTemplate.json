@@ -82,8 +82,8 @@
 	},
 	"variables": {
 		"name_scriptFile": "setupOHS.sh",
-		"name_outputOHSHost": "[concat(parameters('ohsVMName'),variables('name_publicIPAddress'))]",
-		"name_publicIPAddress": "_PublicIP"
+		"name_publicIPAddress": "_PublicIP",
+		"name_outputOHSHost": "[concat(parameters('ohsVMName'),variables('name_publicIPAddress'))]"
 	},
 	"resources": [
 		{
