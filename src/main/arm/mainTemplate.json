@@ -227,13 +227,5 @@
 		}
 	],
 	"outputs": {
-		"_ohsPublicIP": {
-			"type": "string",
-			"value": "[reference('ohsLinkedTemplate', '2020-06-01').outputs._ohsPublicIP.value]"
-		},
-		"ohsHostName": {
-			"type": "string",
-			"value": "[reference('ohsLinkedTemplate', '2020-06-01').outputs.ohsHostName.value]"
-		}
 	}
 }
