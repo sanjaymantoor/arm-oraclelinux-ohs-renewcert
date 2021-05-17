@@ -87,7 +87,7 @@
 		{
 			"type": "Microsoft.Compute/virtualMachines/extensions",
 			"name": "[concat(parameters('ohsVMName'),'/newuserscript')]",
-			"apiVersion": "${azure.apiVersion}",
+			"apiVersion": "2020-06-01",
 			"location": "[parameters('location')]",
 			"properties": {
 				"publisher": "Microsoft.Azure.Extensions",
@@ -112,15 +112,15 @@
 		},
 		"ohsHostName": {
 			"type": "string",
-			"value": "[reference(variables('name_outputOHSHost'), '${azure.apiVersion}').dnsSettings.fqdn]"
+			"value": "[reference(variables('name_outputOHSHost'), '2020-06-01').dnsSettings.fqdn]"
 		},
 		"ohsAccessURL": {
 			"type": "string",
-			"value": "[concat('http://',reference(variables('name_outputOHSHost'), '${azure.apiVersion}').dnsSettings.fqdn,':',parameters('ohshttpPort'))]"
+			"value": "[concat('http://',reference(variables('name_outputOHSHost'), '2020-06-01').dnsSettings.fqdn,':',parameters('ohshttpPort'))]"
 		},
 		"ohsSecureAccessURL": {
 			"type": "string",
-			"value": "[concat('https://',reference(variables('name_outputOHSHost'), '${azure.apiVersion}').dnsSettings.fqdn,':',parameters('ohshttpsPort'))]"
+			"value": "[concat('https://',reference(variables('name_outputOHSHost'), '2020-06-01').dnsSettings.fqdn,':',parameters('ohshttpsPort'))]"
 		}
 	}
 }
