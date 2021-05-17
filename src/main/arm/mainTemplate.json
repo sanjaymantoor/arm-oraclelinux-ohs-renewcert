@@ -227,13 +227,13 @@
 		}
 	],
 	"outputs": {
-		"ohsAccessURL": {
+		"_ohsPublicIP": {
 			"type": "string",
-			"value": "[reference('ohsLinkedTemplate', '2020-06-01').outputs.ohsAccessURL.value]"
+			"value": "[reference('ohsLinkedTemplate', '2020-06-01').outputs._ohsPublicIP.value]"
 		},
-		"ohsSecureAccessURL": {
+		"ohsHostName": {
 			"type": "string",
-			"value": "[reference('ohsLinkedTemplate', '2020-06-01').outputs.ohsSecureAccessURL.value]"
+			"value": "[reference('ohsLinkedTemplate', '2020-06-01').outputs.ohsHostName.value]"
 		}
 	}
 }
