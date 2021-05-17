@@ -81,9 +81,7 @@
 		}
 	},
 	"variables": {
-		"name_scriptFile": "setupOHS.sh",
-		"name_publicIPAddress": "_PublicIP",
-		"name_outputOHSHost": "[concat(parameters('ohsVMName'),variables('name_publicIPAddress'))]"
+		"name_scriptFile": "setupOHS.sh"
 	},
 	"resources": [
 		{
@@ -108,13 +106,5 @@
 		}
 	],
 	"outputs": {
-		"_ohsPublicIP": {
-			"type": "string",
-			"value": "[resourceId('Microsoft.Network/publicIPAddresses',concat(parameters('ohsVMName'),variables('name_publicIPAddress')))]"
-		},
-		"ohsHostName": {
-			"type": "string",
-			"value": "[reference(variables('name_outputOHSHost'), '2020-06-01').dnsSettings.fqdn]"
-		}
 	}
 }
