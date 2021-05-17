@@ -81,7 +81,9 @@
 		}
 	},
 	"variables": {
-		"name_scriptFile": "setupOHS.sh"
+		"name_scriptFile": "setupOHS.sh",
+		"name_outputOHSHost": "[concat(parameters('ohsVMName'),variables('name_publicIPAddress'))]",
+		"name_publicIPAddress": "_PublicIP"
 	},
 	"resources": [
 		{
@@ -113,14 +115,6 @@
 		"ohsHostName": {
 			"type": "string",
 			"value": "[reference(variables('name_outputOHSHost'), '2020-06-01').dnsSettings.fqdn]"
-		},
-		"ohsAccessURL": {
-			"type": "string",
-			"value": "[concat('http://',reference(variables('name_outputOHSHost'), '2020-06-01').dnsSettings.fqdn,':',parameters('ohshttpPort'))]"
-		},
-		"ohsSecureAccessURL": {
-			"type": "string",
-			"value": "[concat('https://',reference(variables('name_outputOHSHost'), '2020-06-01').dnsSettings.fqdn,':',parameters('ohshttpsPort'))]"
 		}
 	}
 }
