@@ -121,7 +121,13 @@
 			"metadata": {
 				"description": "Price tier for Key Vault."
 			}
-		}
+		},
+		"ohsVMName": {
+			"type": "string",
+			"metadata": {
+				"description": "User name for the Virtual Machine."
+			}
+		}		
 	},
 	"variables": {
 		"const_ohsSSLConfigAccessOptionUploadConfig": "uploadConfig",
@@ -158,6 +164,9 @@
 					},
 					"keyVaultName": {
 						"value": "[variables('name_keyVaultName')]"
+					},
+					"ohsVMName": {
+						"value": "[parameters('ohsVMName')]"					
 					}
 				}
 			}
